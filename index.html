@@ -38,15 +38,8 @@
             box-sizing: border-box;
         }
 
-        .fade {
-            animation-name: fade;
-            animation-duration: 0.5s;
-        }
-
-        @keyframes fade {
-            from {opacity: .4} 
-            to {opacity: 1}
-        }
+        .fade { animation-name: fade; animation-duration: 0.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
 
         .prev, .next {
             cursor: pointer;
@@ -68,29 +61,15 @@
             user-select: none;
         }
 
-        .prev {
-            left: -70px;
-        }
+        .prev { left: -70px; }
+        .next { right: -70px; }
+        .prev:hover, .next:hover { background-color: #aaaaaa; }
 
-        .next {
-            right: -70px;
-        }
-
-        .prev:hover, .next:hover {
-            background-color: #aaaaaa;
-        }
-
-        .slide h1 { font-size: 3.5em; text-align: center; border-bottom: 4px solid #FFC425; padding-bottom: 20px; color: #005A9C; }
+        .slide h1 { font-size: 3.5em; text-align: center; border-bottom: 4px solid #11a800; padding-bottom: 20px; color: #005A9C; }
         .slide h2 { font-size: 2.8em; margin-top: 0; margin-bottom: 30px; text-align: center; color: #005A9C; }
         .single-content { text-align: center; }
         .single-content p { font-size: 1.5em; color: #444; }
-        .single-content pre {
-            font-size: 1.6em;
-            display: inline-block;
-            text-align: left;
-            width: auto;
-            max-width: 100%;
-        }
+        .single-content pre { font-size: 1.6em; display: inline-block; text-align: left; max-width: 100%; }
         pre { background-color: #2d3436; color: #fff; padding: 15px; border-radius: 5px; font-size: 1.1em; white-space: pre-wrap; }
         .footer { position: absolute; bottom: 20px; right: 40px; font-size: 1em; color: #888; }
         table { width: 100%; border-collapse: collapse; font-size: 1.2em; }
@@ -99,38 +78,37 @@
 
         /* === MEDIA QUERIES PARA DISEÑO RESPONSIVO === */
         @media screen and (max-width: 768px) {
-            body {
-                padding: 15px; /* Reducimos el padding general */
-            }
-
+            body { padding: 15px; }
             .slideshow-container {
-                width: 100%; /* El contenedor ocupa todo el ancho */
+                width: 100%;
+                padding-bottom: 75px; /* Creamos espacio abajo para los botones */
             }
-
             .slide {
-                height: auto; /* Altura automática para ajustarse al contenido */
-                min-height: 75vh; /* Hacemos que la diapositiva ocupe casi toda la altura de la pantalla */
-                padding: 20px 25px; /* Menos padding interno */
+                height: auto;
+                min-height: 75vh;
+                padding: 20px 25px;
             }
 
-            /* Movemos los botones dentro de la diapositiva */
+            /* === NUEVO POSICIONAMIENTO DE BOTONES PARA MÓVIL === */
             .prev, .next {
+                top: auto; /* Anulamos el posicionamiento vertical */
+                bottom: 15px; /* Los posicionamos en el espacio inferior creado */
                 width: 45px;
                 height: 45px;
-                background-color: rgba(0, 0, 0, 0.4);
-                color: white;
-                font-size: 20px;
             }
 
             .prev {
-                left: 15px; /* Lo despegamos del borde izquierdo */
+                left: 50%; /* Alineamos el borde izquierdo al centro */
+                transform: translateX(-110%); /* Lo movemos a la izquierda de la línea central */
             }
 
             .next {
-                right: 15px; /* Lo despegamos del borde derecho */
+                left: 50%; /* Alineamos el borde izquierdo al centro */
+                transform: translateX(10%); /* Lo movemos a la derecha de la línea central */
+                right: auto; /* Anulamos la regla 'right' de escritorio */
             }
 
-            /* Ajustamos los tamaños de fuente para mejor legibilidad */
+            /* Ajustes generales de fuente */
             .slide h1 { font-size: 2.2em; }
             .slide h2 { font-size: 1.8em; }
             .single-content p { font-size: 1.1em; }
