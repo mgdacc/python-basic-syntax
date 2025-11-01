@@ -5,31 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presentación Interactiva: Sintaxis de Python</title>
     <style>
+        /* === ESTILOS GLOBALES Y DE ESCRITORIO === */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
-            padding: 40px; /* Añadimos padding para que los botones no se corten */
+            padding: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
+            transition: padding 0.3s ease;
         }
 
-        /* Contenedor principal para el carrusel */
         .slideshow-container {
             position: relative;
             width: 90%;
             max-width: 960px;
         }
         
-        /* Estilo base de cada diapositiva, ahora oculta por defecto */
         .slide {
-            display: none; /* Ocultamos todas las diapositivas */
+            display: none;
             background-color: #fff;
             border: 1px solid #ccc;
-            height: 540px; /* Proporción 16:9 */
+            height: 540px;
             padding: 40px 60px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             flex-direction: column;
@@ -38,7 +38,6 @@
             box-sizing: border-box;
         }
 
-        /* Animación de Fade In */
         .fade {
             animation-name: fade;
             animation-duration: 0.5s;
@@ -49,33 +48,26 @@
             to {opacity: 1}
         }
 
-        /* === NUEVO ESTILO PARA BOTONES === */
         .prev, .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
-            transform: translateY(-50%); /* Centra verticalmente de forma precisa */
-            
-            /* Apariencia circular */
+            transform: translateY(-50%);
             width: 50px;
             height: 50px;
-            background-color: #000000;
-            color: #fff;
-            border-radius: 0%;
+            background-color: #cccccc;
+            color: #333;
+            border-radius: 50%;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-
-            /* Centrado del icono de flecha */
             display: flex;
             justify-content: center;
             align-items: center;
-
             font-weight: bold;
             font-size: 24px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             user-select: none;
         }
 
-        /* Posicionamiento fuera de la diapositiva */
         .prev {
             left: -70px;
         }
@@ -85,26 +77,11 @@
         }
 
         .prev:hover, .next:hover {
-            background-color: #aaaaaa; /* Gris más oscuro al pasar el ratón */
+            background-color: #aaaaaa;
         }
 
-        /* --- Estilos del contenido de la diapositiva (sin cambios) --- */
-        .slide h1, .slide h2 {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: #005A9C;
-        }
-        .slide h1 {
-            font-size: 3.5em;
-            text-align: center;
-            border-bottom: 4px solid #FFC425;
-            padding-bottom: 20px;
-        }
-        .slide h2 {
-            font-size: 2.8em;
-            margin-top: 0;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+        .slide h1 { font-size: 3.5em; text-align: center; border-bottom: 4px solid #FFC425; padding-bottom: 20px; color: #005A9C; }
+        .slide h2 { font-size: 2.8em; margin-top: 0; margin-bottom: 30px; text-align: center; color: #005A9C; }
         .single-content { text-align: center; }
         .single-content p { font-size: 1.5em; color: #444; }
         .single-content pre {
@@ -114,28 +91,53 @@
             width: auto;
             max-width: 100%;
         }
-        pre {
-            background-color: #2d3436;
-            color: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            font-size: 1.1em;
-            white-space: pre-wrap;
-        }
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            right: 40px;
-            font-size: 1em;
-            color: #888;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 1.2em;
-        }
+        pre { background-color: #2d3436; color: #fff; padding: 15px; border-radius: 5px; font-size: 1.1em; white-space: pre-wrap; }
+        .footer { position: absolute; bottom: 20px; right: 40px; font-size: 1em; color: #888; }
+        table { width: 100%; border-collapse: collapse; font-size: 1.2em; }
         th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
         th { background-color: #f2f2f2; }
+
+        /* === MEDIA QUERIES PARA DISEÑO RESPONSIVO === */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 15px; /* Reducimos el padding general */
+            }
+
+            .slideshow-container {
+                width: 100%; /* El contenedor ocupa todo el ancho */
+            }
+
+            .slide {
+                height: auto; /* Altura automática para ajustarse al contenido */
+                min-height: 75vh; /* Hacemos que la diapositiva ocupe casi toda la altura de la pantalla */
+                padding: 20px 25px; /* Menos padding interno */
+            }
+
+            /* Movemos los botones dentro de la diapositiva */
+            .prev, .next {
+                width: 45px;
+                height: 45px;
+                background-color: rgba(0, 0, 0, 0.4);
+                color: white;
+                font-size: 20px;
+            }
+
+            .prev {
+                left: 15px; /* Lo despegamos del borde izquierdo */
+            }
+
+            .next {
+                right: 15px; /* Lo despegamos del borde derecho */
+            }
+
+            /* Ajustamos los tamaños de fuente para mejor legibilidad */
+            .slide h1 { font-size: 2.2em; }
+            .slide h2 { font-size: 1.8em; }
+            .single-content p { font-size: 1.1em; }
+            .single-content pre { font-size: 1em; }
+            table { font-size: 0.9em; }
+            .footer { font-size: 0.8em; right: 25px; }
+        }
     </style>
 </head>
 <body>
@@ -145,7 +147,7 @@
         <!-- Aquí van todas tus diapositivas -->
         <div class="slide fade">
             <h1>Cheat Sheet de Python</h1>
-            <h2 style="text-align:center; color:#333; border:none;">Sintaxis Básica</h2>
+            <h2 style="color:#333; border:none;">Sintaxis Básica</h2>
             <div class="footer">1 / 14</div>
         </div>
 
@@ -246,27 +248,24 @@
         let slideIndex = 1;
         showSlides(slideIndex);
 
-        // Función para avanzar o retroceder diapositivas
         function plusSlides(n) {
             showSlides(slideIndex += n);
         }
 
-        // Función principal para mostrar la diapositiva correcta
         function showSlides(n) {
             let i;
             let slides = document.getElementsByClassName("slide");
-            if (n > slides.length) { slideIndex = 1 } // Si se pasa del final, vuelve al principio
-            if (n < 1) { slideIndex = slides.length } // Si retrocede desde el principio, va al final
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
             
-            // Oculta todas las diapositivas
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
             
-            // Muestra la diapositiva actual con el estilo flex
             slides[slideIndex - 1].style.display = "flex";
         }
     </script>
 
 </body>
 </html>
+
