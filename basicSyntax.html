@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Interactiva: Sintaxis de Python</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 40px; /* Añadimos padding para que los botones no se corten */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Contenedor principal para el carrusel */
+        .slideshow-container {
+            position: relative;
+            width: 90%;
+            max-width: 960px;
+        }
+        
+        /* Estilo base de cada diapositiva, ahora oculta por defecto */
+        .slide {
+            display: none; /* Ocultamos todas las diapositivas */
+            background-color: #fff;
+            border: 1px solid #ccc;
+            height: 540px; /* Proporción 16:9 */
+            padding: 40px 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Animación de Fade In */
+        .fade {
+            animation-name: fade;
+            animation-duration: 0.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+
+        /* === NUEVO ESTILO PARA BOTONES === */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%); /* Centra verticalmente de forma precisa */
+            
+            /* Apariencia circular */
+            width: 50px;
+            height: 50px;
+            background-color: #000000;
+            color: #fff;
+            border-radius: 0%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+            /* Centrado del icono de flecha */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-weight: bold;
+            font-size: 24px;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+
+        /* Posicionamiento fuera de la diapositiva */
+        .prev {
+            left: -70px;
+        }
+
+        .next {
+            right: -70px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: #aaaaaa; /* Gris más oscuro al pasar el ratón */
+        }
+
+        /* --- Estilos del contenido de la diapositiva (sin cambios) --- */
+        .slide h1, .slide h2 {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #005A9C;
+        }
+        .slide h1 {
+            font-size: 3.5em;
+            text-align: center;
+            border-bottom: 4px solid #FFC425;
+            padding-bottom: 20px;
+        }
+        .slide h2 {
+            font-size: 2.8em;
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .single-content { text-align: center; }
+        .single-content p { font-size: 1.5em; color: #444; }
+        .single-content pre {
+            font-size: 1.6em;
+            display: inline-block;
+            text-align: left;
+            width: auto;
+            max-width: 100%;
+        }
+        pre {
+            background-color: #2d3436;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            white-space: pre-wrap;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            font-size: 1em;
+            color: #888;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.2em;
+        }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+        <!-- Aquí van todas tus diapositivas -->
+        <div class="slide fade">
+            <h1>Cheat Sheet de Python</h1>
+            <h2 style="text-align:center; color:#333; border:none;">Sintaxis Básica</h2>
+            <div class="footer">1 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Comentarios</h2>
+            <div class="single-content"><p>Notas en el código que Python ignora.</p><pre><code># Comentario de una línea</code></pre></div>
+            <div class="footer">2 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Variables</h2>
+            <div class="single-content"><p>Contenedores para almacenar valores.</p><pre><code>nombre = "Python"</code></pre></div>
+            <div class="footer">3 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Función <code>print()</code></h2>
+            <div class="single-content"><p>Muestra información en la consola.</p><pre><code>print("¡Hola, Mundo!")</code></pre></div>
+            <div class="footer">4 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Indentación</h2>
+            <div class="single-content"><p>¡Es crucial! Define los bloques de código.</p><pre><code>if True:
+    print("Esto está indentado")</code></pre></div>
+            <div class="footer">5 / 14</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2 style="text-align:left;">Operadores Aritméticos</h2>
+            <table>
+                <tr><th>Operador</th><th>Descripción</th><th>Ejemplo</th></tr>
+                <tr><td><code>+</code></td><td>Suma</td><td><code>10 + 5</code></td></tr>
+                <tr><td><code>-</code></td><td>Resta</td><td><code>10 - 5</code></td></tr>
+                <tr><td><code>*</code></td><td>Multiplicación</td><td><code>10 * 5</code></td></tr>
+                <tr><td><code>/</code></td><td>División (float)</td><td><code>10 / 3</code></td></tr>
+                <tr><td><code>//</code></td><td>División entera</td><td><code>10 // 3</code></td></tr>
+                <tr><td><code>%</code></td><td>Módulo (resto)</td><td><code>10 % 3</code></td></tr>
+                <tr><td><code>**</code></td><td>Exponenciación</td><td><code>2 ** 3</code></td></tr>
+            </table>
+            <div class="footer">6 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Tipo: String (<code>str</code>)</h2>
+            <div class="single-content"><p>Para almacenar texto.</p><pre><code>nombre = "Alice"</code></pre></div>
+            <div class="footer">7 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Tipo: Integer (<code>int</code>)</h2>
+            <div class="single-content"><p>Para números enteros.</p><pre><code>edad = 30</code></pre></div>
+            <div class="footer">8 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Tipo: Float (<code>float</code>)</h2>
+            <div class="single-content"><p>Para números con decimales.</p><pre><code>altura = 1.75</code></pre></div>
+            <div class="footer">9 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Tipo: Boolean (<code>bool</code>)</h2>
+            <div class="single-content"><p>Para valores de verdadero o falso.</p><pre><code>es_activo = True</code></pre></div>
+            <div class="footer">10 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Colección: Lista (<code>list</code>)</h2>
+            <div class="single-content"><p>Colección ordenada y modificable.</p><pre><code>frutas = ["manzana", "banana"]</code></pre></div>
+            <div class="footer">11 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Colección: Tupla (<code>tuple</code>)</h2>
+            <div class="single-content"><p>Colección ordenada e inmutable.</p><pre><code>coordenadas = (10.0, 20.5)</code></pre></div>
+            <div class="footer">12 / 14</div>
+        </div>
+        
+        <div class="slide fade">
+            <h2>Colección: Diccionario (<code>dict</code>)</h2>
+            <div class="single-content"><p>Colección de pares clave-valor.</p><pre><code>persona = {"nombre": "Bob"}</code></pre></div>
+            <div class="footer">13 / 14</div>
+        </div>
+
+        <div class="slide fade">
+            <h2>Colección: Conjunto (<code>set</code>)</h2>
+            <div class="single-content"><p>Colección desordenada de elementos únicos.</p><pre><code>numeros_unicos = {1, 2, 3}</code></pre></div>
+            <div class="footer">14 / 14</div>
+        </div>
+
+        <!-- Botones de navegación -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Función para avanzar o retroceder diapositivas
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Función principal para mostrar la diapositiva correcta
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            if (n > slides.length) { slideIndex = 1 } // Si se pasa del final, vuelve al principio
+            if (n < 1) { slideIndex = slides.length } // Si retrocede desde el principio, va al final
+            
+            // Oculta todas las diapositivas
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            // Muestra la diapositiva actual con el estilo flex
+            slides[slideIndex - 1].style.display = "flex";
+        }
+    </script>
+
+</body>
+</html>
